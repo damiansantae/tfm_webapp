@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <title>Trafico Calle 30</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
+
+            $(".pm-marker").on("click", function () {
+                console.log('pm_marker clicked');
+                $("#dialog").dialog("open");
+            });
+        });
+    </script>
+
+</head>
+<body onload='draw(0);'>
+
+
+<div id="map"></div>
+<div id="speedo">
+    <canvas id="speedometer" width="440" height="220">Canvas not available</canvas>
+    <div>
+        <form id="drawTemp">
+            <input type="text" id="txtSpeed" name="txtSpeed" value="625"/>
+        </form>
+    </div>
+</div>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <label for="date">Fecha:</label>
+    <input type="date" id="date" name="date" id="date"><br/>
+    <label for="time">Hora:</label>
+    <input type="time" id="time" name="time" id="time"> <br/>
+    <input type="checkbox" id="tp">Trabajo planificado</input><br/>
+    <select id="fase">
+        <option value="a">Fase A</option>
+        <option value="b">Fase B</option>
+        <option value="c">Fase C</option>
+        <option value="d">Fase D</option>
+        <option value="e">Fase E</option>
+        <option value="f">Fase F</option>
+        <option value="g">Fase G</option>
+        <option value="h">Fase H</option>
+        <option value="i">Fase I</option>
+    </select><br/>
+    <input type="button" value="Confirmar" onclick="change_state()">
+
+
+</div>
+<span style="font-size:30px;cursor:pointer;position: absolute" onclick="openNav()">&#9776; Escenario</span>
+<div class="map-overlay top">
+    <div class="map-overlay-inner">
+        <h2>Contaminacion</h2>
+        <label id="hour"></label>H
+        <input id="slider" type="range" min="0" max="23" step="1" value="0"/>
+    </div>
+    <div class="map-overlay-inner">
+        <div id="legend" class="legend">
+            <div class="bar"></div>
+            <div>Dióxido de nitrógeno (ug/m3)</div>
+        </div>
+    </div>
+</div>
+
+<script src="js/request_controller.js"></script>
+<script src="js/view_controller.js"></script>
+<script src="js/map_controller.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+
+</body>
